@@ -104,19 +104,6 @@ export class CarInfoComponent implements OnInit {
     return a && b && a.BranchID == b.BranchID;
   }
 
-  setCarType() { //to update the local order with the branch after user choose pickup
-    this.localCar.CarInfo = this.localCarTypeModel[0];
-    // const cartType = this.localCarTypeModel.filter(carType => carType.CarTypeID === parseInt(id));
-    // this.localCar.CarInfo = cartType[0];
-  }
-
-  setBranch(id) { //to update the local order with the branch after user choose pickup
-    const branch = this.localBranchesModel.filter(branch => branch.BranchID === parseInt(id));
-    this.localCar.BranchLocation = branch[0];
-  }
-
-
-
   //////////// File upload functions /////////
   handleFileInput(file: FileList) {
     //Save image to the class property

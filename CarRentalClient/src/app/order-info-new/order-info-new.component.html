@@ -66,9 +66,9 @@
                 <label>
                     <strong> Pickup from:</strong>
                 </label>
-                <select [disabled]="isOktoOrder" class="form-control" placeholder="Pickup From" [(ngModel)]="localOrder.Car.BranchLocation.BranchID"
-                    (ngModelChange)="setBranch(localOrder.Car.BranchLocation.BranchID)" name="pickupFrom">
-                    <option *ngFor="let b of localBranchesList" [value]="b.BranchID">{{b.BranchName}}</option>
+                <select [disabled]="isOktoOrder" class="form-control" placeholder="Pickup From" [(ngModel)]="localOrder.Car.BranchLocation" [compareWith]="compareBranchID"
+                    name="pickupFrom">
+                    <option *ngFor="let branch of localBranchesList" [ngValue]="branch">{{branch.BranchName}}</option>
                 </select>
             </div>
         </div>

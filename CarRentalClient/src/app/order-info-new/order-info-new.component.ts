@@ -114,6 +114,11 @@ export class OrderInfoNewComponent implements OnInit {
     }
   }
 
+  compareBranchID(a, b) {
+    // console.log(a, b, a && b && a.BranchID == b.BranchID);
+    return a && b && a.BranchID == b.BranchID;
+  }
+
   getAllBranches() {
     this.myBranchesService.getAllBranches()
       .subscribe(
@@ -124,11 +129,7 @@ export class OrderInfoNewComponent implements OnInit {
   backToCars(){
     this.myRoute.navigate(['/Cars']);
   }
-
-  setBranch(id) { //to update the local order with the branch after user choose pickup
-    const branch = this.localBranchesList.filter(branch => branch.BranchID === parseInt(id));
-    this.localOrder.Car.BranchLocation = branch[0];
-  }
+  
   reSched() { //reschdeule after checking
     this.localOrder.OrigianlCost = 0;
     this.actionMsg = "";

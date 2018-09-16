@@ -1,7 +1,7 @@
 
 # Car Rental Company Project
 
-## Data Base
+## DataBase
 **Technologies, Infrastructure and providers for this project**
 * MS SQL Server
 * C# (Server Side) with WebAPI
@@ -11,8 +11,8 @@
 * Interceptor
 * Angular material
 
-## Server side
-* The server is build according to the N-tier model.
+## Server
+* The C# server is build according to the N-tier model.
 
 ***
 ## DB

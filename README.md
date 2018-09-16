@@ -81,3 +81,14 @@ After the **server** is up and running  you can see the port used for communicat
 1. Navigate to **"environment.ts"** , located in src folder.
 2. Update the **endpoint parameter** with your local server port
 etc – 'http:/localhost:**XXX**'
+
+**4. System Users**
+* These are username / password for the system users:
+1. admin / admin123
+2. worker1 /  worker123
+3. worker2 / worker123
+4. user1 / user123
+5. user2 / user123
+6. user3 / user123
+7. user4 / user123
+

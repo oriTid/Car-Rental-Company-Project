@@ -44,15 +44,13 @@
 
     <label>Car Type:</label>
 
-    <select class="form-control" #Cartype [(ngModel)]="localCar.CarInfo.CarTypeID" (ngModelChange)="setCarType(localCar.CarInfo.CarTypeID)"
-      name="cartype">
-      <option class="w-50" *ngFor="let cartype of localCarTypeModel" value="{{cartype.CarTypeID}}">{{cartype.FullName}}</option>
+    <select type="number" class="form-control" [(ngModel)]="localCar.CarInfo" name="cartype" [compareWith]="compareCarTypeID">
+      <option class="w-50" *ngFor="let cartype of localCarTypeModel" [ngValue]="cartype">{{cartype.FullName}}</option>
     </select>
 
     <label>Branch:</label>
-    <select class="form-control" #Branch [(ngModel)]="localCar.BranchLocation.BranchID" (ngModelChange)="setBranch(localCar.BranchLocation.BranchID)"
-      name="branch">
-      <option *ngFor="let branch of localBranchesModel" value="{{branch.BranchID}}">{{branch.BranchName}}</option>
+    <select class="form-control" [(ngModel)]="localCar.BranchLocation"  name="branch" [compareWith]="compareBranchID">
+      <option *ngFor="let branch of localBranchesModel" [ngValue]="branch">{{branch.BranchName}}</option>
     </select>
 
     <br/>

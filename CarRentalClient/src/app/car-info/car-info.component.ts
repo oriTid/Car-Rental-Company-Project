@@ -93,10 +93,21 @@ export class CarInfoComponent implements OnInit {
     this.myRoute.navigate(['/Cars']);
   }
 
+  compareCarTypeID(a, b) {
+    // console.log(a, b, a && b && a.CarTypeID == b.CarTypeID);
+    return a && b && a.CarTypeID == b.CarTypeID;
+  }
 
-  setCarType(id) { //to update the local order with the branch after user choose pickup
-    const cartType = this.localCarTypeModel.filter(carType => carType.CarTypeID === parseInt(id));
-    this.localCar.CarInfo = cartType[0];
+
+  compareBranchID(a, b) {
+    // console.log(a, b, a && b && a.BranchID == b.BranchID);
+    return a && b && a.BranchID == b.BranchID;
+  }
+
+  setCarType() { //to update the local order with the branch after user choose pickup
+    this.localCar.CarInfo = this.localCarTypeModel[0];
+    // const cartType = this.localCarTypeModel.filter(carType => carType.CarTypeID === parseInt(id));
+    // this.localCar.CarInfo = cartType[0];
   }
 
   setBranch(id) { //to update the local order with the branch after user choose pickup
@@ -140,11 +151,7 @@ export class CarInfoComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.localCarsManager = this.myCarsService.carInfo;
-    //this.localCarTypesManager = this.myCarTypesService.carTypeInfo;
-    //  this.localBranchesManager = this.myBranchesService.branchInfo;
-
-
+    
     zip(
       this.myCarTypesService.getAllCarTypes(),
       this.myBranchesService.getAllBranches()

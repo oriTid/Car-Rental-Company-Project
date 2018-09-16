@@ -55,10 +55,9 @@ API that receives client requests and performs them with the relevant BLL Manage
 ## Installation
 **1. DB creation**
 
-1. Files for creating the DB located in the "DB Creation" folder : https://github.com/oriTid/CS_Search_project/FINAL/tree/master/DB%20Creat
-2. You have 2 options for creating the DB:
-* Restore CS_Search_DB.bak
-* Execute Script CS_Search_DB.sql on SQL Server 
+You have 2 options for creating the DB:
+* Restore CarRentComp_backup.bak
+* Execute Script CarRentDB.sql on SQL Server 
 ***
 
 

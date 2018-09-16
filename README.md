@@ -18,7 +18,7 @@
 ## DB
 ** DB  Diagram**
 Attached a DB diagram 
-**More info can be found in XXX.doc** 
+**More info can be found in CarRent Project - DOC STILL inProgress.docx (doc is still in work)** 
  ![Screenshot]( DB-Diagram.PNG)
 ***
 ### DAL

@@ -56,8 +56,8 @@ API that receives client requests and performs them with the relevant BLL Manage
 **1. DB creation**
 
 You have 2 options for creating the DB:
-* Restore CarRentComp_backup.bak
-* Execute Script CarRentDB.sql on SQL Server 
+* Restore **CarRentComp_backup.bak**
+* Execute Script **CarRentDB.sql** on SQL Server 
 ***
 
 
@@ -66,7 +66,7 @@ You have 2 options for creating the DB:
 After DB is created, you will need to update the Data-Connection, in order for the program to work properly:
 
 **The connection is set in the Web.Config file located in the 04_UIL:**
-1. Update *data source* with your SQL server name  : data source=YOUR SQL SERVER NAME
+1. Update **data source** with your SQL server name  : data source=**YOUR SQL SERVER NAME**
 2. Update **catalog** with the DB name **(if you changed it)** initial catalog=CarRentComp (or you DB name if you change it)
 
 **Dont forget to update connection string before running the server.**

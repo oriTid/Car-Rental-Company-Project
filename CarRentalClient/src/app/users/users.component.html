@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>System Users:</h1>
+
+  <div class="well well-lg" *ngIf="actionMsg">{{actionMsg}}</div>
+
+  <hr/>
+  <a class="btn btn-primary" routerLink="/signup">Add new User</a>
+  <hr/>
+  <div class="row">
+    <div class="col-md-4 car-container" *ngFor="let x of localUsersManager.usersList">
+      <div class="thumbnail">
+        <img *ngIf="x.UserPic!=undefiened" src="{{localenv}}/images/{{x.UserPic}}" style=" border-radius: 50%; width:150px;height:150px;display:block;">
+        <h3>
+          <div class="caption">{{x.FirstName}} {{x.LastName}}</div>
+        </h3>
+        <hr>
+        <p>User Id:
+          <span>{{x.UserID}}</span>
+        </p>
+        <p>Email:
+          <span>{{x.Email}}</span>
+        </p>
+        <p>
+          <button class="btn btn-primary mx-1" [routerLink]="['/signup', x.UserID]">Edit This User</button>
+        </p>
+        <p>
+          <button class="btn btn-primary" (click)="deleteUser(x.UserID)">Delete User</button>
+        </p>
+      </div>
+    </div>
+  </div>

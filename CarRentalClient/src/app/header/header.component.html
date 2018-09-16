@@ -1,0 +1,83 @@
+<div class="d-flex flex-row fixed-top" style="background-color: rgba(255, 255, 255, 0.966)">
+  
+  <img style="width: 20%; height:20%;" src="../../assets/images/logo.png" routerLink="/Home">
+  <div class="align-self-center">
+    <strong>
+      <a routerLink="/Home" class="w3-bar-item w3-button">Home</a>
+    </strong>
+  </div>
+  <div class="align-self-center">
+    <strong>
+      <a routerLink="/Cars" class="w3-bar-item w3-button">Cars</a>
+    </strong>
+  </div>
+
+  <div class="align-self-center">
+    <strong>
+      <a routerLink="/Branches" class="w3-bar-item w3-button">Branches</a>
+    </strong>
+  </div>
+  <div *ngIf="localUser.singleUser" class="w3-dropdown-hover align-self-center">
+    <strong>
+      <a routerLink="/Orders" *ngIf="localUser.singleUser.UserPermission==2 || localUser.singleUser.UserPermission==1" class="w3-button">Manage Orders</a>
+    </strong>
+  </div>
+
+  <div *ngIf="localUser.singleUser" class="w3-dropdown-hover align-self-center">
+    <strong>
+      <a routerLink="/Userinfo" *ngIf="localUser.singleUser.UserPermission==0" class="w3-button">My Orders</a>
+    </strong>
+  </div>
+
+  <div *ngIf="localUser.singleUser" class="w3-dropdown-hover align-self-center">
+    <div>
+      <strong>
+        <button *ngIf="localUser.singleUser.UserPermission==2" class="w3-button">Admin</button>
+      </strong>
+    </div>
+
+    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+      <a class="w3-bar-item w3-button" routerLink="/insertCar"> Add Car</a>
+      <a class="w3-bar-item w3-button" routerLink="/Cars"> Manage Cars</a>
+      <hr class="divider" />
+
+      <a class="w3-bar-item w3-button" routerLink="/insertCarType">Add Car type</a>
+      <a class="w3-bar-item w3-button" routerLink="/CarTypes"> Manage Cars Types</a>
+      <hr class="divider" />
+
+      <a class="w3-bar-item w3-button" routerLink="/insertBranch">Add Branch</a>
+      <a class="w3-bar-item w3-button" routerLink="/Branches">Manage Branches</a>
+      <hr class="divider" />
+
+      <a routerLink="/signup" class="w3-bar-item w3-button">Add user</a>
+      <a routerLink="/Users" class="w3-bar-item w3-button">Manage Users</a>
+      <hr class="divider" />
+
+      <a routerLink="/Orders" class="w3-bar-item w3-button">Manage Orders</a>
+    </div>
+  </div>
+
+  <div class="ml-auto p-4 align-self-center">
+    <div class="w3-dropdown-hover align-self-center">
+
+      <button *ngIf="localUser.singleUser" class="w3-button">{{localUser.singleUser.UserName}}</button>
+      <img *ngIf="localUser.singleUser && localUser.singleUser.UserPic!=undefiened" src="{{localenv}}/images/{{localUser.singleUser.UserPic}}"
+        style=" border-radius: 50%; width:60px;height:60px;display:inline-block;">
+      <div *ngIf="localUser.singleUser" class="w3-dropdown-content w3-bar-block w3-card-4" style=" margin-left: -85%">
+        <a *ngIf="localUser.singleUser.UserPermission==2 || localUser.singleUser.UserPermission==1" routerLink="/Orders" class="w3-bar-item w3-button w3-right">Manage Orders</a>
+        <a *ngIf="localUser.singleUser.UserPermission==0" routerLink="/Userinfo" class="w3-bar-item w3-button w3-right">My Orders</a>
+        <hr class="divider" />
+        <button (click)="signOut()" routerLink="/Home" class="w3-bar-item w3-button w3-right">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="align-self-center">
+    <strong>
+      <p *ngIf="!localUser.singleUser">
+        <a class=" w3-bar-item w3-button w3-right" routerLink="/signup"> SignUp</a>
+        <a class=" w3-bar-item w3-button w3-right" routerLink="/signin"> Login</a>
+      </p>
+    </strong>
+  </div>
+</div>

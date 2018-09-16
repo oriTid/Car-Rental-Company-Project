@@ -1,0 +1,16 @@
+.signin {
+    width: 600px;
+    height: 460px;
+    background: white;
+    text-align: center;
+    padding: 20px 81px;
+    margin: auto;
+}
+
+input {
+    border-left: none;
+}
+
+button {
+    width: 165px;
+}

@@ -1,0 +1,53 @@
+<section class="signin shadow-lg">
+    <!-- <pre dir="ltr">{{localUser|json}}</pre> -->
+    <form #signinForm>
+        <div class="d-flex flex-column justify-content-center flex-align-center">
+            <div class="py-4">
+                <img *ngIf="localUser.UserPic" src="{{localenv}}/images/{{localUser.UserPic}}" alt="No Image found" style="border-radius:50%; width:250px;height:200px;display:block;">
+            </div>
+            <div class="w-100 py-2">
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white">
+                            <i class="material-icons text-secondary">account_circle</i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" autocomplete="nickname" placeholder="User Name" [(ngModel)]="localUser.UserName"
+                        name="username">
+                </div>
+            </div>
+            
+            <div class="w-100 py-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white">
+                            <i class="material-icons text-secondary">lock</i>
+                        </span>
+                    </div>
+                    <input type="password" class="form-control" autocomplete="new-password" placeholder="Password" [(ngModel)]="localUser.Password"
+                        name="password">
+                </div>
+            </div>
+
+            <div class="py-4">
+                <button type="button" style="background-color:rgb(16, 150, 16); border: 0" class="btn btn-primary mx-1" (click)="getUser(localUser.UserName, localUser.Password)">Login</button>
+            </div>
+
+            <div class="d-flex flex-row align-items-end p-2 animated fadeIn" [style.min-height.px]="'15'">
+                <div class="text-right px-2 w-100">
+                    <h2 [ngClass]="{'text-success': myUsersService.isAuth , 'text-danger': !myUsersService.isAuth }">
+                        <strong>{{actionMsg}}</strong>
+                    </h2>
+                </div>
+            </div>
+
+            <div *ngIf=" !myUsersService.isAuth" class="py-4">
+                <P>Dont have an account ?</P>
+
+                <button type="button" class="btn btn-primary mx-1" routerLink="/signup">SignUp</button>
+
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,51 @@
+<div class="container">
+  <h1 style="margin-top:50px">Car Types:</h1>
+
+  <div class="well well-lg" *ngIf="actionMsg">{{actionMsg}}</div>
+
+  <hr/>
+  <a class="btn btn-primary" routerLink="/insertCarType">Add new Car Type</a>
+  <hr/>
+  <div class="row">
+
+    <div class="col-md-3 car-container  shadow-lg " style="margin: 5px" *ngFor="let x of localCarTypeManager.carTypesList">
+      <div class="thumbnail">
+
+        <h3>
+          <div class="caption"> Car Type : {{x.FullName}}</div>
+        </h3>
+        <p>CarTypeID : {{x.CarTypeID}}</p>
+
+        <hr>
+        <p>Manufacturer:
+          <span>{{x.Manufacturer}}</span>
+        </p>
+        <p>Model:
+          <span>{{x.Model}}</span>
+        </p>
+
+        <p>Gear Type:
+          <span *ngIf="x.IsAutomatic">Automatic</span>
+          <span *ngIf="!x.IsAutomatic">Non-Automatic</span>
+        </p>
+        <p>Rate:
+          <span> {{x.DailyRate | currency}} per day</span>
+        </p>
+        <p>Late Rate:
+          <span> {{x.LateDailyRate| currency}} per late dat</span>
+        </p>
+        <p>Model:
+          <span>{{x.Model}}</span>
+        </p>
+
+        <p>
+          <button *ngIf="localUser.singleUser.UserPermission==2" class="btn btn-primary" routerLink="/EditCarType/{{x.CarTypeID}}">Edit Car Type</button>
+        </p>
+        <p>
+          <button class="btn btn-primary" (click)="deleteCarType(x.CarTypeID)">Delete Car Type</button>
+        </p>
+
+      </div>
+
+    </div>
+  </div>

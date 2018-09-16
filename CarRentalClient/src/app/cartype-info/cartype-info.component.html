@@ -1,0 +1,51 @@
+
+<div class="container">
+    <!-- <pre dir="ltr">{{localCarType|json}}</pre> -->
+  <h1 >
+    {{(localParam != undefined)?"Edit": "Add"}} Car Type
+  </h1>
+
+  <div class="well well-lg" *ngIf="actionMsg">{{actionMsg}}</div>
+
+  <div class="form-group" >
+    <label>Car Type ID:</label>
+    <input type="number" class="form-control" placeholder="Car Type" readonly [(ngModel)]="localCarType.CarTypeID">
+  </div>
+
+  <div class="form-group">
+    <label>Manufacturer Name:</label>
+    <input type="text" class="form-control" placeholder="Manufacturer Name" [(ngModel)]="localCarType.Manufacturer">
+  </div>
+  <div class="form-group">
+    <label>Model:</label>
+    <input type="text" class="form-control" placeholder="Model" [(ngModel)]="localCarType.Model">
+  </div>
+  <div class="form-group">
+    <label>Car Year:</label>
+    <input type="number" class="form-control" placeholder="Car Year" [(ngModel)]="localCarType.CarYear">
+  </div>
+
+  <div class="form-group">
+      <label class="w-100" [style.min-width]="'50%'">Gear Type:</label>
+      <label class="radio-inline" [style.min-width.px]="'100'">
+        <input type="radio" id="Auto" value="true" name="gear" [(ngModel)]="localCarType.IsAutomatic" checked>Automatic
+      </label>
+      <label class="radio-inline">
+        <input type="radio" id="Non-Auto" value="false"  [(ngModel)]="localCarType.IsAutomatic" name="gear">Non-Automatic
+      </label>
+    </div>
+
+  <div class="form-group">
+    <label>Daily Rate:</label>
+    <input type="number" class="form-control" placeholder="Daily Rate" [(ngModel)]="localCarType.DailyRate">
+  </div>
+  <div class="form-group">
+    <label>Late Daily Rate:</label>
+    <input type="number" class="form-control" placeholder="Late Daily Rate" [(ngModel)]="localCarType.LateDailyRate">
+  </div>
+
+
+  <button class="btn btn-primary" (click)="saveChanges()">Submit</button>
+  <button  *ngIf="(localParam!=Add)" class="btn btn-primary" (click)="markCarTypeforDelete(true)">Delete</button>  
+
+</div>

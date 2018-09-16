@@ -1,0 +1,152 @@
+<!-- <pre dir="ltr">{{localOrder|json}}</pre> -->
+<!-- <pre dir="ltr">{{actionMsg|json}</pre>
+<pre dir="ltr">{{isOktoOrder|json}</pre> -->
+<section class="shadow-lg m-3">
+    <div class="d-flex flex-row justify-content-between align-items-start w-100 ">
+        <div class="w-50 position-relative" [style.height.px]="'350'">
+            <img *ngIf="localOrder?.Car?.CarPic" class="w-80 h-100 p-3" src="{{localenv}}/images/{{localOrder?.Car.CarPic}}">
+        </div>
+        <div class="w-50">
+            <div class="d-flex flex-column justify-content-start">
+                <div class="d-flex flex-row justify-content-start align-items-start">
+                </div>
+                <div>
+                    <div class="d-flex flex-row justify-content-start align-items-start">
+                        <div>
+                            <h2>{{localOrder?.Car?.CarInfo?.FullName}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="localOrder.OrderID>0">
+                    <span>
+                        <strong>Order ID: </strong> #{{localOrder?.OrderID}}
+                        <br/>
+                        <strong>Client Name: </strong> {{localOrder?.UserID.FirstName}} {{localOrder?.UserID.LastName}}</span>
+                </div>
+                <br/>
+                <div>
+                    <div class="d-flex flex-row justify-content-start align-items-start">
+                        <div>
+                            <span>
+                                <strong>Car Year: </strong> {{localOrder?.Car?.CarInfo?.CarYear}}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-start align-items-start">
+                        <div>
+                            <span>
+                                <strong>License Number: </strong> {{localOrder?.Car?.LicenseNumber}}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-start align-items-start">
+                        <div>
+                            <span>
+                                <strong>Current Kilometers: </strong> {{localOrder?.Car?.CurrentKilometers | number}}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-start align-items-start">
+                        <div>
+                            <span>
+                                <strong>Daily Rate: </strong> {{localOrder?.Car?.CarInfo?.DailyRate | currency}}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-start align-items-start">
+                        <div>
+                            <span>
+                                <strong>Late Daily Rate: </strong>{{localOrder?.Car?.CarInfo?.LateDailyRate | currency}} </span>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="d-flex flex-row justify-content-start">
+        <div class="w-25 px-3">
+            <div class="form-group">
+                <label>
+                    <strong> Pickup from:</strong>
+                </label>
+                <select [disabled]="isOktoOrder" class="form-control" placeholder="Pickup From" [(ngModel)]="localOrder.Car.BranchLocation.BranchID"
+                    (ngModelChange)="setBranch(localOrder.Car.BranchLocation.BranchID)" name="pickupFrom">
+                    <option *ngFor="let b of localBranchesList" [value]="b.BranchID">{{b.BranchName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="w-25 px-3">
+            <div class="form-group">
+                <label>
+                    <strong> Rent Start Date:</strong>
+                </label>
+                <input [disabled]="isOktoOrder" type="date" autocomplete="off" class="form-control" [ngModel]="localOrder.OrderStart | date:'yyyy-MM-dd'"
+                    (ngModelChange)="localOrder.OrderStart = $event" name="OrderStart" placeholder="Start Date" required>
+            </div>
+        </div>
+        <div class="w-25 px-3">
+            <div class="form-group">
+                <label>
+                    <strong> Rent End Date:</strong>
+                </label>
+                <input [disabled]="isOktoOrder" type="date" autocomplete="off" class="form-control" [ngModel]="localOrder.PlannedEnd | date:'yyyy-MM-dd'"
+                    (ngModelChange)="localOrder.PlannedEnd = $event" name="PlannedEnd" placeholder="Plan End" required>
+            </div>
+        </div>
+        <div class="w-25 px-3 pt-2 align-self-end">
+            <div *ngIf="actionMsg!='Thanks. Your order has been submitted.' && localOrder.OrigianlCost == 0" class="form-group">
+                <button class="btn btn-primary" [disabled]="!localOrder.OrderStart || !localOrder.PlannedEnd" (click)="checkUserOrder()">Check Avaliablity</button>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="isOktoOrder" class="d-flex flex-row justify-content-end align-items-end animated fadeIn" [style.min-height.px]="'35'">
+        <div>
+            <span>
+                <strong>Total Order's Planned time.................................... </strong> {{totalPlannedRentDays}} days</span>
+        </div>
+    </div>
+
+    <div *ngIf="isOktoOrder" class="d-flex flex-row justify-content-end align-items-end animated fadeIn" [style.min-height.px]="'25'">
+        <div>
+            <span>
+                <strong>Daily Rate.................................... </strong> {{localOrder?.Car?.CarInfo?.DailyRate | currency}}</span>
+        </div>
+    </div>
+        
+    <div *ngIf="actionMsgFin" class="d-flex flex-row align-items-end p-2" [style.min-height.px]="'75'">
+        <div class="text-right px-2 w-100">
+          <h2 [ngClass]="{'text-success': isOktoOrder , 'text-danger': !isOktoOrder }">
+            <strong>{{actionMsgFin}}</strong>
+          </h2>
+        </div>
+      </div>
+
+    <div class="d-flex flex-row align-items-end border p-2 animated fadeIn" [style.min-height.px]="'75'">
+        <div class="text-right px-2 w-100">
+            <h2 [ngClass]="{'text-success': isOktoOrder , 'text-danger': !isOktoOrder }">
+                <strong>{{actionMsg}}</strong>
+            </h2>
+        </div>
+    </div>
+    
+    <div *ngIf="isOktoOrder" class="d-flex flex-row align-items border p-2 animated fadeIn" [style.min-height.px]="'75'">
+        <div *ngIf="actionMsg=='Thanks. Your order has been submitted.' && isOktoOrder" class="text-right px-2 w-100" [style.width]="'10%'">
+            <button style="background:rgb(33, 133, 33)" class="btn btn-primary" (click)="backToCars()">Back to Cars</button>
+        </div>        
+    </div> 
+
+    <div *ngIf="isOktoOrder" class="d-flex flex-row align-items border p-2 animated fadeIn" [style.min-height.px]="'75'">
+        <div *ngIf="actionMsg!='Thanks. Your order has been submitted.' && isOktoOrder" class="text-right px-2 w-100" [style.width]="'10%'">
+            <button style="background:indianred" class="btn btn-primary" [disabled]="!localOrder.OrderStart || !localOrder.PlannedEnd"
+                (click)="reSched()">Re Schedule</button>
+        </div>
+        <div>
+            <button *ngIf="actionMsg!='Thanks. Your order has been submitted.'" style="background:rgb(33, 133, 33)" [disabled]="!isOktoOrder"
+                class="btn btn-primary" (click)="saveChanges()">Submit Order</button>
+        </div>
+    </div>
+
+    <div *ngIf="actionMsg=='Sorry. Car is unavaliable in those dates. Try again.'" class="text-right px-2 w-100" [style.width]="'10%'">
+        <button style="background:indianred" class="btn btn-primary" [disabled]="!localOrder.OrderStart || !localOrder.PlannedEnd"
+            (click)="reSched()">Re Schedule</button>
+    </div>
+
+</section>

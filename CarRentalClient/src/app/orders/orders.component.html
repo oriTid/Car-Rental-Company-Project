@@ -1,0 +1,94 @@
+<div class="d-flex flex-column justify-content-center align-items-center px-5  w-100">
+  <div *ngIf="localUser.singleUser ">
+    <div *ngIf="localUser.singleUser.UserPermission==2 || localUser.singleUser.UserPermission==1">
+      <div class="text-left">
+        <h1>All Orders</h1>
+      </div>
+      <div class="search d-flex flex-row w-100">
+        <div class="flex-column align-content-between" [style.width.px]="'120'">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white" id="icons">
+                <i class="material-icons text-secondary">search</i>
+              </span>
+            </div>
+            <input type="text" placeholder="#ID" class="form-control" autocomplete="" [(ngModel)]="textSearchOrder" name="oid">
+          </div>
+        </div>
+        <div [style.width.px]="'120'">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white" id="icons">
+                <i class="material-icons text-secondary">search</i>
+              </span>
+            </div>
+            <input type="text" placeholder="License" class="form-control" autocomplete="" [(ngModel)]="textSearch" name="ln">
+          </div>
+        </div>
+        <div [style.width.px]="'120'">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white" id="icons">
+                <i class="material-icons text-secondary">search</i>
+              </span>
+            </div>
+            <input type="text" placeholder="User" class="form-control" autocomplete="" [(ngModel)]="textSearchUser" name="user">
+          </div>
+        </div>
+      </div>
+      <div [style.width.px]="'120'">
+        <label class="radio-inline">
+          <input type="radio" value="true" name="active" [(ngModel)]="isActive"> Active Orders
+        </label>
+        <div [style.width.px]="'120'">
+          <label class="radio-inline">
+            <input type="radio" value="" name="active" [(ngModel)]="isActive"> All Orders
+          </label>
+        </div>
+      </div>
+      <div class="fix-table">
+        <table class="table table-hover table-striped">
+          <thead>
+            <th scope="col">OrderID</th>
+            <th scope="col">Order Date</th>
+            <th scope="col" style="text-align: center">Car</th>
+            <th scope="col">License Number</th>
+            <th scope="col">Rent Start</th>
+            <th scope="col">Rent End</th>
+            <th scope="col">Original Cost</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Rent Actual End</th>
+            <th scope="col">Total Cost</th>
+            <th scope="col">Active Order</th>
+            <th scope="col">Actions</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of localOrdersManager.AllOrders | filterNumber: textSearch : 'Car' : 'LicenseNumber' | filterNumber: textSearchOrder : 'OrderID' | filterText: textSearchUser : 'UserID' : 'UserName' | filterNumber: isActive : 'IsActiveOrder'">
+              <td scope="row">
+                <strong>{{x.OrderID}}</strong>
+              </td>
+              <td> {{x.OrderDate | date:'dd/MM/yyyy'}}</td>
+              <td>
+                <img *ngIf="localUser.singleUser && x.Car.CarPic!=undefiened" src="{{localenv}}/images/{{x.Car.CarPic}}" style=" border-radius: 50%; width:60px;height:60px;display:inline-block;"> {{x.Car.CarInfo.FullName}}
+              </td>
+              <td> {{x.Car.LicenseNumber}}</td>
+              <td> {{x.OrderStart | date:'dd/MM/yyyy' }}</td>
+              <td> {{x.PlannedEnd | date:'dd/MM/yyyy'}}</td>
+              <td> {{x.OrigianlCost | currency}}</td>
+              <td> {{x.UserID.UserName}}</td>
+              <td> {{x.ActualEnd | date:'dd/MM/yyyy'}}</td>
+              <td> {{x.ActualCost | currency}}</td>
+              <td> {{x.IsActiveOrder}}</td>
+              <td class="text-center">
+                <button *ngIf="x.IsActiveOrder && !canCancel(x.OrderStart)" class="btn btn-primary mx-1" [routerLink]="['/OrderClose', x.Car.CarID, {order: x.OrderID}]">Close Active Order</button>
+                <button *ngIf="x.IsActiveOrder && canCancel(x.OrderStart)" class="btn btn-primary mx-1" [routerLink]="['/OrderClose', x.Car.CarID, {order: x.OrderID}]">Cancel Future Order</button>
+                <button *ngIf="!x.IsActiveOrder && localUser.singleUser.UserPermission==2" class="btn btn-primary" (click)="markOrderforDelete(x.OrderID)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

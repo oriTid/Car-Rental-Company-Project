@@ -1,0 +1,11 @@
+::ng-deep .mat-dialog-container {
+    padding: 0;
+}
+
+.bg-primary {
+    background-image:linear-gradient(108deg, #1e80c8, #2e9aea) !important
+}
+
+button {
+ width: 180px;
+}

@@ -1,0 +1,59 @@
+<div class="d-flex flex-column justify-content-center align-items-center px-5 w-100">
+  <div class="fixed-top" style="width: 300px">
+    <div class="text-left" style="margin-top: 100px;" [style.text-left]>
+      <h1>Cars</h1>
+    </div>
+    <div class="search d-flex flex-row w-100" [style.margin-left.px]="'10'">
+      <div class="flex-column align-content-between" [style.width.px]="'250'">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-white" id="icons">
+              <i class="material-icons text-secondary">search</i>
+            </span>
+          </div>
+          <input type="text" placeholder="Search by Manufacturer" class="form-control" autocomplete="" [(ngModel)]="textSearch" name="textSearch">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row justify-content-center flex-wrap w-100" style="margin-top: 150px;">
+    <div class="w-25 shadow-lg m-2 p-2" *ngFor="let x of localCarsManager.allCars | filterText: textSearch : 'CarInfo' : 'Manufacturer'">
+      <div class="thumbnail  text-center">
+        <h3>
+          <div class="caption"> {{x.CarInfo.Manufacturer}} {{x.CarInfo.Model}} </div>
+        </h3>
+        <img class="animated lightSpeedIn " *ngIf="x.CarPic" src="{{localenv}}/images/{{x.CarPic}}" alt="No Image found" style="width:250px;height:200px;display:block;"
+        />
+        <h6> Car Type : {{x.CarInfo.CarTypeID}}</h6>
+        <h6> Car id : {{x.CarID}}</h6>
+        <p>Model Year:
+          <span>{{x.CarInfo.CarYear}}</span>
+        </p>
+
+        <p>Starting
+          <span>{{x.CarInfo.DailyRate | currency}}/day</span>
+        </p>
+
+        <div *ngIf="localUser.singleUser">
+          <p>
+            <button *ngIf="localUser.singleUser.UserPermission==2" class="btn btn-primary mx-1" [routerLink]="['/EditCar', x.CarID , {editMode: true}]">Edit Car</button>
+          </p>
+        </div>
+        <div *ngIf="localUser.singleUser">
+          <p>
+            <button *ngIf="localUser.singleUser.UserPermission==2" style="background-color: rgb(194, 42, 42)" class="btn btn-primary mx-1" (click)="deleteCar(x.CarID)">Delete Car</button>
+          </p>
+        </div>
+        <p>
+          <button class="btn btn-primary mx-1" [routerLink]="['/Carinfopublic', x.CarID , {editMode: false}]">More Info</button>
+        </p>
+        <div *ngIf="!localUser.singleUser || localUser.singleUser.UserPermission==0">
+          <p>
+            <button class="btn btn-primary mx-1" (click)="goTo(x.CarID)">Book This Car</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container ">
+
+  <div class="well well-lg" *ngIf="actionMsg">{{actionMsg}}</div>
+  <h1 class="header">Branches:</h1>
+  <hr/>
+  <div *ngIf="localUser.singleUser">
+
+    <button *ngIf="localUser.singleUser.UserPermission==2" class="btn btn-primary" routerLink="/insertBranch">Add new Branch</button>
+    <hr/>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 car-container shadow-lg " style="margin: 5px" *ngFor="let x of localBranchesManager.branchesList">
+      <div class="thumbnail">
+
+        <h3>
+          <div class="caption"> {{x.BranchName}} Branch</div>
+        </h3>
+        <hr>
+        <p>Branch Tel:
+          <span>{{x.BranchTel}}</span>
+        </p>
+        <p>Branch Address:
+          <span>{{x.BranchAddress}}</span>
+        </p>
+        <div *ngIf="localUser.singleUser">
+          <p>
+            <button *ngIf="localUser.singleUser.UserPermission==2" class="btn btn-primary" routerLink="/EditBranch/{{x.BranchID}}">Edit Branch</button>
+          </p>
+          <p>
+            <button  *ngIf="localUser.singleUser.UserPermission==2"  class="btn btn-primary" (click)="deleteBranch(x.BranchID)">Delete Branch</button>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>

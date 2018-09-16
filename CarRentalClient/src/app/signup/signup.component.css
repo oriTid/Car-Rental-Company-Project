@@ -1,0 +1,17 @@
+.signup {
+    width: 600px;
+    height: auto;
+    background: white;
+    text-align: center;
+    padding: 20px 81px;
+    margin: auto;
+}
+
+input {
+    border-left: none;
+}
+
+label{margin-left: 20px;}
+#datepicker{width:180px; margin: 0 20px 20px 20px;}
+#datepicker > span:hover{cursor: pointer;
+}

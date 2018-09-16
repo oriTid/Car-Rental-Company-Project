@@ -1,0 +1,61 @@
+<form class="d-flex flex-column justify-content-center align-items-center w-100">
+  <!-- <pre dir="ltr">{{localCar|json}}</pre> -->
+  <h3>
+    {{(localParam != undefined)?"Edit Car:": "Add a new Car"}} {{localCar.CarInfo.FullName}}
+  </h3>
+
+  <div class="well well-lg" *ngIf="actionMsg">{{actionMsg}}</div>
+  <img *ngIf="localCar.CarPic!=undefiened" src="{{localenv}}/images/{{localCar.CarPic}}" style="width:250px;height:200px;display:block;"
+  />
+
+  <div *ngIf="localParam == undefined" class="form-group" class="w-50">
+    <label>CarID:</label>
+    <input type="number" class="form-control" placeholder="CarID" readonly [(ngModel)]="localCar.CarID" name="CarId">
+
+  </div>
+
+  <div class="form-group" class="w-50" *ngIf="localParam != undefined">
+    <label>LicenseNumber:</label>
+    <input type="text" class="form-control" placeholder="LicenseNumber" readonly [(ngModel)]="localCar.LicenseNumber" name="LN">
+  </div>
+  <div class="form-group" class="w-50" *ngIf="localParam == undefined">
+    <label>LicenseNumber:</label>
+    <input type="text" class="form-control" placeholder="LicenseNumber" [(ngModel)]="localCar.LicenseNumber" name="cartype" name="LN2">
+  </div>
+
+  <div class="form-group" class="w-50">
+    <label>CurrentKilometers:</label>
+    <input type="number" class="form-control" placeholder="CurrentKilometers" [(ngModel)]="localCar.CurrentKilometers" name="curKM">
+  </div>
+
+  <form class="w-50">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="IsOperative" [(ngModel)]="localCar.IsOperative" name="isOperative">
+      <label class="custom-control-label" for="IsOperative">Car is Operative</label>
+    </div>
+  </form>
+
+  <form class="w-50">
+    <label>Car Image:</label>
+    <div>
+      <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+      <img *ngIf="imageUrl" [src]="imageUrl" style="width:250px;height:200px;display:block;">
+    </div>
+
+    <label>Car Type:</label>
+
+    <select class="form-control" #Cartype [(ngModel)]="localCar.CarInfo.CarTypeID" (ngModelChange)="setCarType(localCar.CarInfo.CarTypeID)"
+      name="cartype">
+      <option class="w-50" *ngFor="let cartype of localCarTypeModel" value="{{cartype.CarTypeID}}">{{cartype.FullName}}</option>
+    </select>
+
+    <label>Branch:</label>
+    <select class="form-control" #Branch [(ngModel)]="localCar.BranchLocation.BranchID" (ngModelChange)="setBranch(localCar.BranchLocation.BranchID)"
+      name="branch">
+      <option *ngFor="let branch of localBranchesModel" value="{{branch.BranchID}}">{{branch.BranchName}}</option>
+    </select>
+
+    <br/>
+    <button class="btn btn-primary" (click)="saveChanges()">Save</button>
+    <div class="well well-lg" *ngIf="actionMsg">{{actionMsg}}</div>
+  </form>

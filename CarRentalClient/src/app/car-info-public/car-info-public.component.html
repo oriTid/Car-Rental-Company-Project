@@ -1,0 +1,96 @@
+<section class="carinfo shadow-lg">
+  <form #carinfo>
+    <div class="d-flex flex-column">
+      <div class="card-body">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active " id="home-tab" style="background-color: rgb(235, 207, 137)" data-toggle="tab" href="#home">
+              <strong>{{localCar.CarInfo.FullName}}</strong>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="Info-tab" style="background-color: rgb(235, 207, 137)" data-toggle="tab" href="#Info">More Details</a>
+          </li>
+        </ul>
+        <div class="tab-content animated fadeIn" id="myTabContent">
+          <div class="tab-pane show active" id="home">
+            <img *ngIf="localCar.CarPic!=undefiened" src="{{localenv}}/images/{{localCar.CarPic}}" style="width:450px;height:400px;display:block;"
+            />
+            <br>
+            <label> Current KM: {{localCar.CurrentKilometers}}</label>
+            <br>
+            <label> Current Location: {{localCar.BranchLocation.BranchName}}</label>
+            <br/>
+            <label> Manufactor Year: {{localCar.CarInfo.CarYear}}</label>
+            <br/>
+            <br/>
+            <label> Starting from:
+              <strong>{{localCar.CarInfo.DailyRate | currency}}/day</strong>
+            </label>
+
+          </div>
+          <div class="tab-pane text-left animated zoomIn" id="Info">
+            <br/>
+            <img class="float-right" *ngIf="localCar.CarPic!=undefiened" src="{{localenv}}/images/{{localCar.CarPic}}" style="width:150px;height:100px;display:block;"
+            />
+            <label> Car ID: {{localCar.CarID}}</label>
+            <br/>
+            <label> Car Type ID: {{localCar.CarInfo.CarTypeID}}</label>
+            <br>
+            <br>
+            <form class="w-50">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="IsOperative" [(ngModel)]="localCar.IsOperative" name="isOperative"
+                  disabled>
+                <label class="custom-control-label" for="IsOperative">Car is Operative</label>
+              </div>
+            </form>
+            <form class="w-50">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="IsAuto" [(ngModel)]="localCar.CarInfo.IsAutomatic" name="IsAuto"
+                  disabled>
+                <label class="custom-control-label" for="IsAuto">Automatic Gear</label>
+              </div>
+            </form>
+            <br/>
+            <label> License Number:
+              <strong>{{localCar.LicenseNumber}}</strong>
+            </label>
+            <br/>
+            <br/>
+            <label> Manufactor: {{localCar.CarInfo.Manufacturer}}</label>
+            <br/>
+            <label> Model: {{localCar.CarInfo.Model}}</label>
+            <br/>
+            <label> Model: {{localCar.CarInfo.CarYear}}</label>
+            <br/>
+            <br/>
+            <label> Current KM: {{localCar.CurrentKilometers}}</label>
+            <br>
+            <label> Current Location: {{localCar.BranchLocation.BranchName}}</label>
+            <br/>
+            <br/>
+            <label> Daily Rate:
+              <strong>{{localCar.CarInfo.DailyRate | currency}}/day</strong>
+            </label>
+            <br/>
+            <label> Late Daily Rate:
+              <strong>{{localCar.CarInfo.LateDailyRate | currency}}/day</strong>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+    <div class="p-2 bd-highlight" *ngIf="!localUser.singleUser || localUser.singleUser.UserPermission==0">
+      <p>
+        <button class="btn btn-primary mx-1" (click)="goTo(localCar.CarID)">Book This Car</button>
+      </p>
+    </div>
+    <div class="p-2 bd-highlight">
+      <button class="btn btn-primary mx-1" [routerLink]="['/Cars']">Back to Cars</button>
+    </div>
+  </div>
+
+</section>

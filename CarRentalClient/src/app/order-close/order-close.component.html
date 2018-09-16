@@ -1,0 +1,196 @@
+<section class="shadow-lg m-3">
+  <div class="d-flex flex-row justify-content-between align-items-start w-100 ">
+    <div class="w-100 position-relative" [style.height.px]="'350'">
+      <img *ngIf="localOrder?.Car?.CarPic" class="w-80 h-100 p-3" src="{{localenv}}/images/{{localOrder?.Car.CarPic}}">
+    </div>
+    <div class="w-50 position-relative">
+      <div class="d-flex flex-column justify-content-start">
+        <div class="d-flex flex-row justify-content-start align-items-start"></div>
+        <div>
+          <div class="d-flex flex-row justify-content-start align-items-start">
+            <div>
+              <h2>{{localOrder?.Car?.CarInfo?.FullName}}</h2>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span>
+            <strong>Order ID: </strong> #{{localOrder?.OrderID}}
+            <br/>
+            <strong>Client Name: </strong> {{localOrder?.UserID.FirstName}} {{localOrder?.UserID.LastName}}</span>
+        </div>
+        <br/>
+        <div>
+          <div class="d-flex flex-row justify-content-start align-items-start">
+            <div>
+              <span>
+                <strong>Car Year: </strong> {{localOrder?.Car?.CarInfo?.CarYear}}</span>
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-start align-items-start">
+            <div>
+              <span>
+                <strong>License Number: </strong> {{localOrder?.Car?.LicenseNumber}}</span>
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-start align-items-start">
+            <div>
+              <span>
+                <strong>Current Kilometers: </strong> {{localOrder?.Car?.CurrentKilometers | number}}</span>
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-start align-items-start">
+            <div>
+              <span>
+                <strong>Daily Rate: </strong> {{localOrder?.Car?.CarInfo?.DailyRate | currency}}</span>
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-start align-items-start">
+            <div>
+              <span>
+                <strong>Late Daily Rate: </strong>{{localOrder?.Car?.CarInfo?.LateDailyRate | currency}} </span>
+            </div>
+          </div>
+          <br/>
+          <div class="d-flex flex-row justify-content-start align-items-start">
+            <div>
+              <span>
+                <strong>Picked up from: </strong>{{localOrder?.Car?.BranchLocation?.BranchName}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-50 position-relative align-bottom">
+      <div *ngIf="actionMsg=='Thanks. Order Closed!' || actionMsg=='Order was Cancelled'" class="d-flex flex-row align-items-end p-2 animated fadeIn" [style.min-height.px]="'75'">
+        <div class="text-center px-2 w-100">
+          <h2 [ngClass]="{'text-success': !isOktoOrder , 'text-danger': isOktoOrder }">
+            <strong>{{actionMsg}}</strong>
+          </h2>
+        </div>
+      </div>
+      <div *ngIf="actionMsg!='Thanks. Order Closed!' && actionMsg!='Order was Cancelled'" class="d-flex flex-row align-items-end p-2 animated fadeIn" [style.min-height.px]="'75'">
+        <div class="text-center px-2 w-100">
+          <h2 [ngClass]="{'text-success': isOktoOrder , 'text-danger': !isOktoOrder }">
+            <strong>Active Order</strong>
+          </h2>
+        </div>
+      </div>
+
+      <div *ngIf="actionMsg" class="d-flex flex-row align-items-end p-2 animated fadeIn" [style.min-height.px]="'75'" [style.margin-top.px]="'150'">
+        <div class="text-center px-2 w-100" [style.width]="'10%'">
+          <button *ngIf="actionMsg=='Thanks. Order Closed!'|| actionMsg=='Order was Cancelled'" style="background:rgb(33, 133, 33)" class="btn btn-primary" (click)="backToOrders()">Back to Orders</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <form class="d-flex flex-row justify-content-start">
+    <div class="w-25 px-3">
+      <div class="form-group">
+        <label>
+          <strong> Rent Start Date:</strong>
+        </label>
+        <input type="date" readonly autocomplete="off" class="form-control" [ngModel]="localOrder.OrderStart | date:'yyyy-MM-dd'"
+          (ngModelChange)="localOrder.OrderStart = $event" name="OrderStart" placeholder="Start Date" required>
+      </div>
+    </div>
+    <div class="w-25 px-3">
+      <div class="form-group">
+        <label>
+          <strong> Rent End Date:</strong>
+        </label>
+        <input type="date" readonly autocomplete="off" class="form-control" [ngModel]="localOrder.PlannedEnd | date:'yyyy-MM-dd'"
+          (ngModelChange)="localOrder.PlannedEnd = $event" name="PlannedEnd" placeholder="Plan End" required>
+      </div>
+    </div>
+    <div *ngIf="actionMsg!='Thanks. Order Closed!'&& !canCancel()" class="w-25 px-3">
+      <div class="form-group">
+        <label>
+          <strong> Actual End</strong>
+        </label>
+        <input type="date" autocomplete="off" class="form-control" [ngModel]="localOrder.ActualEnd | date:'yyyy-MM-dd'" (ngModelChange)="localOrder.ActualEnd = $event"
+          name="ActualEnd" placeholder="ActualEnd">
+      </div>
+    </div>
+    <div *ngIf="actionMsg=='Thanks. Order Closed!'|| canCancel()" class="w-25 px-3">
+        <div class="form-group">
+          <label>
+            <strong> Actual End</strong>
+          </label>
+          <input type="date" readonly autocomplete="off" class="form-control" [ngModel]="localOrder.ActualEnd | date:'yyyy-MM-dd'" (ngModelChange)="localOrder.ActualEnd = $event"
+            name="ActualEnd" placeholder="ActualEnd">
+        </div>
+      </div>
+    <div class="w-25 px-3 pt-2 align-self-end">
+      <div class="form-group">
+        <button *ngIf="actionMsg!='Thanks. Order Closed!' "class="btn btn-primary" [disabled]="!localOrder.ActualEnd || canCancel()" (click)="closeOrder()">Calculate Actual Price</button>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="actionMsg" [style.padding-right.px]="'60'">
+    <div class="d-flex flex-row justify-content-end align-items-end animated fadeIn" [style.min-height.px]="'25'">
+      <div>
+        <span>
+          Order's Planned days....................................
+          <strong>{{totalPlannedRentDays}} days</strong>
+        </span>
+      </div>
+    </div>
+    <div class="d-flex flex-row justify-content-end align-items-end animated fadeIn" [style.min-height.px]="'25'">
+      <div>
+        <span>
+          Additional days....................................
+          <strong>{{totalLateRentDays}} days</strong>
+        </span>
+      </div>
+    </div>
+    <div class="d-flex flex-row justify-content-end align-items-end animated fadeIn" [style.min-height.px]="'30'">
+      <div>
+        <span>
+          Order's Actaul sum of days....................................
+          <strong>{{actualOrderTime}} days</strong>
+        </span>
+      </div>
+    </div>
+    <hr>
+    <div class="d-flex flex-row justify-content-end align-self-baseline animated fadeIn" [style.min-height.px]="'20'">
+      <div>
+        <span>
+          Original Booked Cost....................................
+          <strong>{{localOrder?.OrigianlCost | currency}}</strong>
+        </span>
+      </div>
+    </div>
+    <div class="d-flex flex-row justify-content-end align-items-end animated fadeIn" [style.min-height.px]="'30'">
+      <div>
+        <span>
+          Charges Delta....................................
+          <strong>{{additionalCharges | currency}}</strong>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="actionMsgFin" class="d-flex flex-row align-items-end p-2 animated fadeIn" [style.min-height.px]="'75'">
+      <div class="text-right px-2 w-100">
+        <h2 [ngClass]="{'text-success': isOktoOrder , 'text-danger': !isOktoOrder }">
+          <strong>{{actionMsgFin}}</strong>
+        </h2>
+      </div>
+    </div>
+    <div *ngIf="!actionMsgFin  && actionMsg!='Order was Cancelled'" class="d-flex flex-row align-items-end p-2 animated fadeIn" [style.min-height.px]="'75'">
+      <div class="text-right px-2 w-100">
+        <h2 [ngClass]="{'text-success': isOktoOrder , 'text-danger': !isOktoOrder }">
+          <strong>{{actionMsg}}</strong>
+        </h2>
+      </div>
+    </div>
+    <div class="text-right px-2 w-100" [style.width]="'10%'">
+      <button *ngIf="actionMsg!='Thanks. Order Closed!' && actionMsg!='Order was Cancelled'" style="background:rgb(33, 133, 33)" class="btn btn-primary" (click)="saveChanges()">Close This Order</button>
+    </div>
+  </div>
+
+  <div *ngIf="canCancel()" class="text-right px-2 w-100" [style.width]="'10%'">
+    <button style="background:rgb(216, 85, 85)" class="btn btn-primary" (click)="cancelFutureOrder(localOrder.OrderID)">Cancel This Order</button>
+  </div>
+</section>

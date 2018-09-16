@@ -1,0 +1,59 @@
+.hoverTable{
+    width:100%;
+    
+   margin-left: auto;
+    margin-right: auto;
+    border-collapse:collapse; 
+    text-align: center;
+	}
+	.hoverTable td{ 
+		padding:7px; border:#4e95f4 1px solid;
+	}
+	/* Define the default color for all the table rows */
+	.hoverTable tr{
+		background: #b8d1f3;
+	}
+	/* Define the hover highlight color for the table row */
+    .hoverTable tr:hover {
+          background-color: #ffff99;
+    }
+    
+    .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 16px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 16px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+    .tg .tg-1lwv{font-weight:bold;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;;background-color:#efefef;text-align:right;vertical-align:top}
+    .tg .tg-c7at{font-weight:bold;background-color:#efefef;text-align:right;vertical-align:top}
+    .tg .tg-0lax{text-align:left;vertical-align:top}
+    
+    td {
+        vertical-align: middle;
+    }
+
+    button {
+        width: 165px;
+    }
+
+.fix-table {
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.search {
+    width: auto;
+    height: auto;
+    align-self: center;
+    background: white;
+    text-align: center;
+    padding: 15px 15px;
+    margin-left: 35%
+}
+
+input {
+    border-left: none;
+}
+
+#icons
+{padding: 1px;
+    margin-left: 15px;
+}

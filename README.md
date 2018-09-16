@@ -54,6 +54,7 @@ API that receives client requests and performs them with the relevant BLL Manage
 ***
 ## Installation
 **1. DB creation**
+
 1. Files for creating the DB located in the "DB Creation" folder : https://github.com/oriTid/CS_Search_project/FINAL/tree/master/DB%20Creat
 2. You have 2 options for creating the DB:
 * Restore CS_Search_DB.bak
@@ -62,6 +63,7 @@ API that receives client requests and performs them with the relevant BLL Manage
 
 
 **2. Data Connection setup  in the server**
+
 After DB is created, you will need to update the Data-Connection, in order for the program to work properly:
 
 **The connection is set in the Web.Config file located in the 04_UIL:**
@@ -72,6 +74,7 @@ After DB is created, you will need to update the Data-Connection, in order for t
 ***
 
 **3. Angular Environment setup**
+
 First thing first - **Don’t forget NPM Install**
 
 After the **server** is up and running  you can see the port used for communicating.
@@ -79,4 +82,3 @@ After the **server** is up and running  you can see the port used for communicat
 1. Navigate to **"environment.ts"** , located in src folder.
 2. Update the **endpoint parameter** with your local server port
 etc – 'http:/localhost:**XXX**'
-

@@ -1,7 +1,7 @@
 
-# Car Rental Company Project
+### Car Rental Company Project
 
-## Data Base
+### Data Base
 **Technologies, Infrastructure and providers for this project**
 * MS SQL Server
 * C# (Server Side) with WebAPI
@@ -11,11 +11,11 @@
 * Interceptor
 * Angular material
 
-## Server side
+### Server side
 * The server is build according to the N-tier model.
 
 ***
-## DB
+### DB
 ** DB  Diagram**
 Attached a DB diagram 
 **More info can be found in XXX.doc** 
@@ -53,14 +53,14 @@ API that receives client requests and performs them with the relevant BLL Manage
 
 ***
 ## Installation
-##DB creation
+###DB creation
 1. Files for creating the DB located in the "DB Creation" folder :        https://github.com/oriTid/CS_Search_project/FINAL/tree/master/DB%20Creat
 2. You have 2 options for creating the DB:
 * Restore CS_Search_DB.bak
 * Execute Script CS_Search_DB.sql on SQL Server 
 ***
 
-##Data Connection setup  in the server
+###Data Connection setup  in the server
 After DB is created, you will need to update the Data-Connection,
 in order for the program to work properly.
 
@@ -68,14 +68,14 @@ in order for the program to work properly.
 1. Update *data source* with your SQL server name  : data source=YOUR SQL SERVER NAME
 2. Update *catalog* with the DB name *(if you changed it)*initial catalog=CarRentComp (or you DB name if you change it)
 
-##Dont forget to update connection string before running the server.
+###Dont forget to update connection string before running the server.
 ***
 
-##Angular Environment setup
+###Angular Environment setup
 First thing first - ##Don’t forget NPM Install
 
 After the *server* is up and running  you can see the port used for communicating.
 
 1. Navigate to "environment.ts" , located in src folder.
-2. Update the *endpoint parameter* with your local server port
+2. Update the ###endpoint parameter with your local server port
 etc – 'http:/localhost:XXX'

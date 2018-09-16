@@ -53,37 +53,29 @@ API that receives client requests and performs them with the relevant BLL Manage
 
 ***
 ## Installation
-1.	DB creation
-i.	Files for creating the DB located in the "DB Creation" folder : https://github.com/oriTid/CS_Search_project/FINAL/tree/master/DB%20Creat
-    
-ii.	*You have 2 options for creating the DB*:    
-1.	Restore CS_Search_DB.bak
-2.	Execute Script CS_Search_DB.sql on SQL Server
+*DB creation*
+1. Files for creating the DB located in the "DB Creation" folder : https://github.com/oriTid/CS_Search_project/FINAL/tree/master/DB%20Creat
+2. You have 2 options for creating the DB:
+* Restore CS_Search_DB.bak
+* Execute Script CS_Search_DB.sql on SQL Server 
+***
 
-iii.	Updating the Data-Connection in the program:
+
+*Data Connection setup  in the server*
 After DB is created, you will need to update the Data-Connection, in order for the program to work properly.
-2.	Connection String
-a.	The connection is set in the Web.Config file located in the 04_UIL:
-<connectionStrings>
-<add name="CarRentEntitiesModel"connectionString="metadata=res://*/CarRentEntitiesModel.csdl|res://*/CarRentEntitiesModel.ssdl|res://*/CarRentEntitiesModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=devps2010;initial catalog=CarRentComp;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
-</connectionStrings>
+***
+* The connection is set in the Web.Config file located in the 04_UIL:
+1. Update *data source* with your SQL server name  : data source=YOUR SQL SERVER NAME
+2. Update *catalog* with the DB name *(if you changed it)*initial catalog=CarRentComp (or you DB name if you change it)
 
-1.	Update 'data source' with SQL server name
-data source=YOUR SQL SERVER NAME
+*Dont forget to update connection string before running the server.*
+***
 
-2.	Update 'catalog' with the DB name (if you changed it)initial catalog=CarRentComp (or you DB name if you change it)
+*Angular Environment setup*
+First thing first - *Don’t forget NPM Install*
 
-3.	Dont forget to update it before running the program.
+After the *server* is up and running  you can see the port used for communicating.
 
-
-3.	Angular environment setup
-After the server is up and running you can see the port used for communicating.
-
-a.	Navigate to "environment.ts" , located in src folder.
-
-b.	Update the endpoint parameter with your local server port
+1. Navigate to "environment.ts" , located in src folder.
+2. Update the *endpoint parameter* with your local server port
 etc – 'http:/localhost:XXX'
-
-c.	Don’t forget NPM Install
-
-

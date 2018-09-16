@@ -18,8 +18,8 @@
 ## DB
 ** DB  Diagram**
 Attached a DB diagram 
-**More info can be found in CarRent Project - DOC STILL inProgress.docx (doc is still in work)** 
- ![Screenshot]( DB-Diagram.PNG)
+![Screenshot]( DB-Diagram.PNG)
+More info -> "CarRent Project - DOC STILL inProgress.docx" **(doc is still in work)** 
 ***
 ### DAL
 * The DAL holds the DB Entity framework.
